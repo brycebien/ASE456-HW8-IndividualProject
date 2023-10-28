@@ -1,19 +1,4 @@
-% ASE 456 Homework 8 (Individual Project Submission)
-
----
-header-includes:
-  - \usepackage{hyperref}  
-  - \hypersetup{colorlinks=true,
-            allbordercolors={0 0 0},
-            pdfborderstyle={/S/U/W 2}}
-  - \DeclareUnicodeCharacter{25CF}{$\bullet$}
-  - \DeclareUnicodeCharacter{251C}{\mbox{\kern.23em
-      \vrule height2.2exdepth1exwidth.4pt\vrule height2.2ptdepth-1.8ptwidth.23em}}
-  - \DeclareUnicodeCharacter{2500}{\mbox{\vrule height2.2ptdepth-1.8ptwidth.5em}}
-  - \DeclareUnicodeCharacter{2502}{\mbox{\kern.23em\vrule height2.2exdepth1exwidth.4pt}}
-  - \DeclareUnicodeCharacter{2514}{\mbox{\kern.23em
-      \vrule height2.2exdepth-1.8ptwidth.4pt\vrule height2.2ptdepth-1.8ptwidth.23em}}        
----
+ASE 456 Homework 8 (Individual Project Submission)
 
 * 100 points in total
 * Use the `Last-First-HW#' directory as a template directory. Copy all your results in the results directory (create sub-directories if necessary) and complete (mark and grade) the grading.docx in the directory. 
