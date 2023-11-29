@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '/components/time_input.dart';
+import '/components/task_input.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
@@ -60,9 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           //TASK
           const Text('Input a task:'),
-          TextField(
+          TaskInput(
             controller: titleController,
-            decoration: const InputDecoration(hintText: 'Enter a task title'),
+            hintText: 'Enter a task',
           ),
           const SizedBox(height: 16),
 
