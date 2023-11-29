@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
-final firestore = FirebaseFirestore.instance;
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -131,11 +131,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ElevatedButton(
             onPressed: () {
               //TODO: input inputs into db
-              print('title: ' + titleController.text);
-              print('date: ' + dateController.text);
-              print('sart time: ' + startTimeController.text);
-              print('end time: ' + endTimeController.text);
-              print('tag: ' + tagsController.text);
+              //remove the timestamp from the date
+              dateController.text =
+                  dateController.text.replaceAll(' 00:00:00.000', '');
+              //Map data to list
+              Map<String, dynamic> data = {
+                'title': titleController.text,
+                'startDate': dateController.text,
+                'from': startTimeController.text,
+                'to': endTimeController.text,
+                'tag': tagsController.text
+              };
+              //input data to db
+              _firestore.collection('records').doc().set(data).then((value) {
+                print('Task added successfully!');
+              }).catchError((error) {
+                print('Error adding task $error');
+              });
             },
             child: const Text('Submit'),
           )
