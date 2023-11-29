@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ase456_hw8_individual_project/time_input.dart';
+
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,35 +89,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
           //START TIME
           const Text('Start Time:'),
-          TextField(
+          TimeInput(
             controller: startTimeController,
-            onTap: () async {
-              TimeOfDay? selectedTime = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-              );
-              if (selectedTime != null) {
-                startTimeController.text = selectedTime.format(context);
-              }
-            },
-            decoration: const InputDecoration(hintText: 'Select start time'),
+            context: context,
+            hintText: 'Select start time',
           ),
           const SizedBox(height: 16),
 
           //END TIME
           const Text('End Time:'),
-          TextField(
+          TimeInput(
             controller: endTimeController,
-            onTap: () async {
-              TimeOfDay? selectedTime = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-              );
-              if (selectedTime != null) {
-                endTimeController.text = selectedTime.format(context);
-              }
-            },
-            decoration: const InputDecoration(hintText: 'Select end time'),
+            context: context,
+            hintText: 'Select end time',
           ),
           const SizedBox(height: 16),
 
