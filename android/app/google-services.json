@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "971530207266",
+    "project_id": "timemanagement-ase456-hw8",
+    "storage_bucket": "timemanagement-ase456-hw8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971530207266:android:26795a963ddb8825310a7b",
+        "android_client_info": {
+          "package_name": "com.example.ase456_hw8_individual_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQl407OcpHqXDWpYbyrF-GGW8muVOib_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
