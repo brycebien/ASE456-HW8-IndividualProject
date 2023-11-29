@@ -159,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
           //QUERY INPUT BUTTON
           ElevatedButton(
             onPressed: () async {
-              //TODO: query from database based on query
               //query events from current day if query == 'today'
               if (queryController.text == 'today') {
                 String date = DateTime.now().toLocal().toString().split(' ')[0];
