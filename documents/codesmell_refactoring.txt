@@ -2,26 +2,26 @@ Code Smell: Duplicate Code
     Found: 11/28/2023
     Refactoring: Extract Class
     Lines: 89-119
-    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/8c29f116529b10a30299c8b236f1ce4cd3cc695e
-    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/da3269727d3b08888e402e07d4251c0370f4765a
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/8c29f116529b10a30299c8b236f1ce4cd3cc695e/lib/main.dart
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/da3269727d3b08888e402e07d4251c0370f4765a/lib/main.dart
 
 Code Smell: Lack of Cohesion
     Found: 11/28/2023
     Refactoring: Extract Class
     Lines: 63-67
-    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/29142f1e692720c3e5a2304faa07af4ed2c00cd6
-    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/29142f1e692720c3e5a2304faa07af4ed2c00cd6/lib/main.dart
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c/lib/main.dart
 
 Code Smell: Lack of Cohesion
     Found: 11/28/2023
     Refactoring: Extract Class
     Lines: 72-86
-    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c
-    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/dff56c1580716d15c44109d750f632a85cbe36b8
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c/lib/main.dart
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/dff56c1580716d15c44109d750f632a85cbe36b8/lib/main.dart
 
 Code Smell: Lack of Cohesion
     Found: 11/28/2023
     Refactoring: Extract Class
     Lines: 99-104
-    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/dff56c1580716d15c44109d750f632a85cbe36b8
-    Link to github w/ refactoring: 
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/dff56c1580716d15c44109d750f632a85cbe36b8/lib/main.dart
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/c63c902a4f24be932d31ff8e1c8373a2be8983ff/lib/main.dart
