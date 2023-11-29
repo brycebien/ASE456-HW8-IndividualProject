@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '/components/time_input.dart';
 import '/components/task_input.dart';
+import '/components/date_input.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
@@ -69,20 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
           //DATE
           const Text('Task Date:'),
-          TextField(
+          DateInput(
             controller: dateController,
-            onTap: () async {
-              DateTime? selectedDate = await showDatePicker(
-                context: context,
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2100),
-              );
-              if (selectedDate != null) {
-                dateController.text =
-                    selectedDate.toLocal().toString().split(' ')[0];
-              }
-            },
-            decoration: const InputDecoration(hintText: 'Select task date'),
+            context: context,
+            hintText: 'Enter a date',
           ),
           const SizedBox(height: 16),
 

@@ -11,3 +11,10 @@ Code Smell: Lack of Cohesion
     Lines: 63-67
     Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/29142f1e692720c3e5a2304faa07af4ed2c00cd6
     Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c
+
+Code Smell: Lack of Cohesion
+    Found: 11/28/2023
+    Refactoring: Extract Class
+    Lines: 72-86
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/05dfe5776be7096f177bec6b634d19111a7ee07c
+    Link to github w/ refactoring: 
