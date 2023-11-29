@@ -64,9 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             controller: titleController,
             decoration: const InputDecoration(hintText: 'Enter a task title'),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
 
           //DATE
           const Text('Task Date:'),
