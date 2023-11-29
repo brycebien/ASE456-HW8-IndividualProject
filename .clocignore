@@ -1,0 +1,16 @@
+pubspec.lock
+analysis_options.yaml
+.metadata
+.flutter-plugins-dependencies
+.flutter-plugins
+windows
+web
+progress
+node_modules
+macos
+linux
+ios
+build
+android
+.idea
+.dart_tool
