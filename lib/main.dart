@@ -1,3 +1,4 @@
+import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -97,10 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
           //TAG
           const Text('Tag:'),
-          TextField(
+          TagInput(
             controller: tagsController,
-            decoration:
-                const InputDecoration(hintText: 'Enter tags (comma-separated)'),
+            hintText: 'Enter Tags (comma-seperated)',
           ),
           const SizedBox(height: 16),
 
