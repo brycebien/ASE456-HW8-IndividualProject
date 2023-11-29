@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var tagsController = TextEditingController();
   var startTimeController = TextEditingController();
   var endTimeController = TextEditingController();
+  var queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 lastDate: DateTime(2100),
               );
               if (selectedDate != null) {
-                dateController.text = selectedDate.toLocal().toString();
+                dateController.text =
+                    selectedDate.toLocal().toString().split(' ')[0];
               }
             },
             decoration: const InputDecoration(hintText: 'Select task date'),
@@ -130,14 +134,10 @@ class _MyHomePageState extends State<MyHomePage> {
           //INPUT BUTTON
           ElevatedButton(
             onPressed: () {
-              //TODO: input inputs into db
-              //remove the timestamp from the date
-              dateController.text =
-                  dateController.text.replaceAll(' 00:00:00.000', '');
-              //Map data to list
+              //Map data to JSON
               Map<String, dynamic> data = {
                 'title': titleController.text,
-                'startDate': dateController.text,
+                'date': dateController.text,
                 'from': startTimeController.text,
                 'to': endTimeController.text,
                 'tag': tagsController.text
@@ -149,7 +149,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('Error adding task $error');
               });
             },
-            child: const Text('Submit'),
+            child: const Text('Submit Record'),
+          ),
+          const SizedBox(height: 25),
+
+          //QUERY
+          TextField(
+            controller: queryController,
+            decoration: const InputDecoration(hintText: 'input a query'),
+          ),
+          const SizedBox(height: 16),
+          //QUERY INPUT BUTTON
+          ElevatedButton(
+            onPressed: () async {
+              //TODO: query from database based on query
+              //query events from current day if query == 'today'
+              if (queryController.text == 'today') {
+                String date = DateTime.now().toLocal().toString().split(' ')[0];
+
+                CollectionReference records = _firestore.collection('records');
+
+                try {
+                  //query db
+                  QuerySnapshot querySnapshot =
+                      await records.where('date', isEqualTo: date).get();
+
+                  //iterating through query results
+                  querySnapshot.docs.forEach((DocumentSnapshot document) {
+                    print(document.data());
+                  });
+                } catch (error) {
+                  print('Error querying data: $error');
+                }
+              }
+            },
+            child: const Text('Submit Query'),
           )
         ],
       ),
