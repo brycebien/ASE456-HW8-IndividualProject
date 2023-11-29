@@ -1,10 +1,7 @@
-import 'dart:html';
-
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
