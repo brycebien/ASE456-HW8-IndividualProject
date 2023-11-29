@@ -2,6 +2,7 @@ Code Smell: Duplicate Code
     Found: 11/28/2023
     Refactoring: Extract Class
     Lines: 89-119
-    Link to github: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/8c29f116529b10a30299c8b236f1ce4cd3cc695e
-
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/8c29f116529b10a30299c8b236f1ce4cd3cc695e
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/tree/da3269727d3b08888e402e07d4251c0370f4765a
+    
 Code Smell: 
