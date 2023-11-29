@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ase456_hw8_individual_project/time_input.dart';
+import '/components/time_input.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 Future<void> main() async {
