@@ -6,6 +6,7 @@ import 'package:ase456_hw8_individual_project/components/time_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Record extends StatelessWidget {
   var titleController = TextEditingController();
   var dateController = TextEditingController();
