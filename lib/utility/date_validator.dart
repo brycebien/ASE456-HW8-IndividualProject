@@ -23,9 +23,6 @@ class DateValidator {
       for (String format in acceptedFormats) {
         try {
           parsedDate = DateFormat(format).parseLoose(date);
-          if (parsedDate != null) {
-            break;
-          }
         } catch (error) {}
       }
       if (parsedDate != null) {

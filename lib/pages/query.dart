@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:ase456_hw8_individual_project/components/show_snackbar.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/components/task_input.dart';
 import 'package:ase456_hw8_individual_project/utility/date_validator.dart';
