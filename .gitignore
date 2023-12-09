@@ -44,6 +44,7 @@
 /packages/flutter/coverage/
 version
 analysis_benchmark.json
+/build/
 
 # packages file containing multi-root paths
 .packages.generated
@@ -127,6 +128,7 @@ coverage/
 
 # Symbols
 app.*.symbols
+app.*.map.json
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
@@ -135,12 +137,8 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-<<<<<<< HEAD
-!.vscode/settings.json
-=======
 !.vscode/settings.json
 android/local.properties
 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 *.java
->>>>>>> upstream/main
