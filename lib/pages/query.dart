@@ -53,37 +53,31 @@ class QueryRecord extends StatelessWidget {
                     date = DateValidator.ValidateDate(queryDateController.text);
                   }
 
-                  List<String> tags =
-                      queryTagController.text.replaceAll(' ', '').split(',');
-                  tags = tags
-                      .map((tag) => tag.startsWith(':')
-                          ? tag.toUpperCase()
-                          : ':$tag'.toUpperCase())
-                      .toList();
-
                   query['date'] = date;
-                  query['tag'] = tags;
+                  query['tag'] = ':${queryTagController.text.toUpperCase()}';
                   query['task'] = queryTitleController.text;
+                  Query querySearch = records;
+                  querySearch = query['date'] != ''
+                      ? querySearch.where('date', isEqualTo: query['date'])
+                      : querySearch;
+                  querySearch = query['tag'] != ':'
+                      ? querySearch.where('tag', isEqualTo: query['tag'])
+                      : querySearch;
+                  querySearch = query['task'] != ''
+                      ? querySearch.where('title', isEqualTo: query['task'])
+                      : querySearch;
                   try {
-                    if (query['date'] != '' &&
-                        query['tag'] != '' &&
-                        query['task'] != '') {
-                      print(query['date']);
-                      print(query['task']);
-                      print(query['tag']);
-                      QuerySnapshot querySnapshot = await records
-                          .where('date', isEqualTo: query['date'])
-                          .where('title', isEqualTo: query['task'])
-                          .where('tag', isEqualTo: query['tag'])
-                          .get();
-                      querySnapshot.docs.forEach(
-                        (DocumentSnapshot document) {
-                          Map<String, dynamic> results =
-                              document.data() as Map<String, dynamic>;
-                          resultsList.add(results);
-                        },
-                      );
-                    }
+                    print(query['date']);
+                    print(query['task']);
+                    print(query['tag']);
+                    QuerySnapshot querySnapshot = await querySearch.get();
+                    querySnapshot.docs.forEach(
+                      (DocumentSnapshot document) {
+                        Map<String, dynamic> results =
+                            document.data() as Map<String, dynamic>;
+                        resultsList.add(results);
+                      },
+                    );
                   } catch (error) {
                     print('Error querying data: $error');
                   }
