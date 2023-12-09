@@ -12,7 +12,6 @@ class Record extends StatelessWidget {
   var tagsController = TextEditingController();
   var startTimeController = TextEditingController();
   var endTimeController = TextEditingController();
-  var queryController = TextEditingController();
   final FirebaseFirestore fireStore;
 
   Record({super.key, required this.fireStore});
@@ -22,7 +21,7 @@ class Record extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Record an Activity'),
+        title: const Center(child: Text('Record an Activity')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
