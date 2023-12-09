@@ -21,11 +21,6 @@ class _DateInputState extends State<DateInput> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.controller,
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(
-          RegExp(r'^\d{4}-\d{2}-\d{2}$'),
-        )
-      ],
       onTap: () async {
         DateTime? selectedDate = await showDatePicker(
           context: widget.context,

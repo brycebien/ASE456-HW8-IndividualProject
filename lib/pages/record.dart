@@ -3,6 +3,7 @@ import 'package:ase456_hw8_individual_project/components/show_snackbar.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/components/task_input.dart';
 import 'package:ase456_hw8_individual_project/components/time_input.dart';
+import 'package:ase456_hw8_individual_project/utility/date_validator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -74,6 +75,8 @@ class Record extends StatelessWidget {
             //INPUT BUTTON
             ElevatedButton(
               onPressed: () {
+                dateController.text =
+                    DateValidator.ValidateDate(dateController.text);
                 if (titleController.text.isEmpty ||
                     dateController.text.isEmpty ||
                     startTimeController.text.isEmpty ||
@@ -89,7 +92,7 @@ class Record extends StatelessWidget {
                 }
 
                 tagsController.text = tagsController.text.startsWith(':')
-                    ? '${tagsController.text.toUpperCase()}'
+                    ? tagsController.text.toUpperCase()
                     : ':{tagsController.text.toUpperCase()}';
                 Map<String, dynamic> data = {
                   'title': titleController.text,
