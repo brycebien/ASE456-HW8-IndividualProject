@@ -1,64 +1,28 @@
+import 'package:ase456_hw8_individual_project/components/date_input.dart';
 import 'package:ase456_hw8_individual_project/components/show_snackbar.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
-import 'package:ase456_hw8_individual_project/firebase_options.dart';
+import 'package:ase456_hw8_individual_project/components/task_input.dart';
+import 'package:ase456_hw8_individual_project/components/time_input.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import '/components/time_input.dart';
-import '/components/task_input.dart';
-import '/components/date_input.dart';
-
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Time Management Application',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Time Management Application'),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class Record extends StatelessWidget {
   var titleController = TextEditingController();
   var dateController = TextEditingController();
   var tagsController = TextEditingController();
   var startTimeController = TextEditingController();
   var endTimeController = TextEditingController();
   var queryController = TextEditingController();
+  final FirebaseFirestore fireStore;
+
+  Record({super.key, required this.fireStore});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Record an Activity'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -140,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'tag': tags
                 };
                 //input data to db
-                _firestore.collection('records').doc().set(data).then((value) {
+                fireStore.collection('records').doc().set(data).then((value) {
                   ShowSnackBar(
                           content: 'Task added successfully!',
                           context: context,
@@ -158,40 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Submit Record'),
             ),
             const SizedBox(height: 25),
-
-            //QUERY
-            TextField(
-              controller: queryController,
-              decoration: const InputDecoration(hintText: 'Input a query'),
-            ),
-            const SizedBox(height: 16),
-            //QUERY INPUT BUTTON
-            ElevatedButton(
-              onPressed: () async {
-                //query events from current day if query == 'today'
-                if (queryController.text == 'today') {
-                  String date =
-                      DateTime.now().toLocal().toString().split(' ')[0];
-
-                  CollectionReference records =
-                      _firestore.collection('records');
-
-                  try {
-                    //query db
-                    QuerySnapshot querySnapshot =
-                        await records.where('date', isEqualTo: date).get();
-
-                    //iterating through query results
-                    querySnapshot.docs.forEach((DocumentSnapshot document) {
-                      print(document.data());
-                    });
-                  } catch (error) {
-                    print('Error querying data: $error');
-                  }
-                }
-              },
-              child: const Text('Submit Query'),
-            )
           ],
         ),
       ),
