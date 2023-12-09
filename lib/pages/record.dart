@@ -67,7 +67,7 @@ class Record extends StatelessWidget {
             const Text('Tag:'),
             TagInput(
               controller: tagsController,
-              hintText: 'Enter Tags (comma-seperated)',
+              hintText: 'Enter a Tag',
             ),
             const SizedBox(height: 16),
 
@@ -88,20 +88,16 @@ class Record extends StatelessWidget {
                   return;
                 }
                 //format tags to array
-                List<String> tags =
-                    tagsController.text.replaceAll(' ', '').split(',');
-                tags = tags
-                    .map((tag) => tag.startsWith(':')
-                        ? tag.toUpperCase()
-                        : ':$tag'.toUpperCase())
-                    .toList();
+                // List<String> tags =
+                //     tagsController.text.replaceAll(' ', '').split(',');
+                tagsController.text = ':${tagsController.text.toUpperCase()}';
                 //Map data to JSON
                 Map<String, dynamic> data = {
                   'title': titleController.text,
                   'date': dateController.text,
                   'from': startTimeController.text,
                   'to': endTimeController.text,
-                  'tag': tags
+                  'tag': tagsController.text
                 };
                 //input data to db
                 fireStore.collection('records').doc().set(data).then((value) {
