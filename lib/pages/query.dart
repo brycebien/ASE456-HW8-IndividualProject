@@ -3,6 +3,7 @@
 import 'package:ase456_hw8_individual_project/components/show_snackbar.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/components/task_input.dart';
+import 'package:ase456_hw8_individual_project/utility/date_validator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -39,10 +40,11 @@ class QueryRecord extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 List<Map<String, dynamic>> resultsList = [];
+                CollectionReference records = fireStore.collection('records');
+
                 if (queryDateController.text == 'today') {
                   String date =
                       DateTime.now().toLocal().toString().split(' ')[0];
-                  CollectionReference records = fireStore.collection('records');
                   try {
                     QuerySnapshot querySnapshot =
                         await records.where('date', isEqualTo: date).get();
@@ -54,35 +56,25 @@ class QueryRecord extends StatelessWidget {
                       },
                     );
                   } catch (error) {
-                    ShowSnackBar(
-                            content: 'Error querying data: $error',
-                            context: context,
-                            duration: 3)
-                        .show();
+                    print('Error querying data: $error');
+                  }
+                } else {
+                  String date =
+                      DateValidator.ValidateDate(queryDateController.text);
+                  print('DATE:::${date}');
+                  try {
+                    QuerySnapshot querySnapshot =
+                        await records.where('date', isEqualTo: date).get();
+                    querySnapshot.docs.forEach((DocumentSnapshot document) {
+                      Map<String, dynamic> results =
+                          document.data() as Map<String, dynamic>;
+                      resultsList.add(results);
+                    });
+                  } catch (error) {
+                    print('Error querying data: $error');
                   }
                 }
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Query Result'),
-                      content: SingleChildScrollView(
-                        child: Column(
-                          children: resultsList.map((result) {
-                            return ListTile(
-                              title: Text(
-                                result['title'] ?? '',
-                                style: const TextStyle(fontSize: 30),
-                              ),
-                              subtitle: Text(
-                                  'DATE: ${result['date']}\nTAGS: ${result['tag'].toString()}\nFROM: ${result['from']}\nTO: ${result['to']}'),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
-                );
+                _showQuery(resultsList, context);
               },
               child: const Text('Submit Query'),
             )
@@ -91,6 +83,36 @@ class QueryRecord extends StatelessWidget {
       ),
     );
   }
+
+  Future<dynamic> _showQuery(
+      List<Map<String, dynamic>> resultsList, BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Query Result'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: resultsList.map((result) {
+                return ListTile(
+                  title: Text(
+                    result['title'] ?? '',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                  subtitle: Text(
+                      'DATE: ${result['date']}\nTAGS: ${result['tag'].toString()}\nFROM: ${result['from']}\nTO: ${result['to']}'),
+                );
+              }).toList(),
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(Icons.close),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
- //QUERY
-            
