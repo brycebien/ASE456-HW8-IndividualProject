@@ -109,6 +109,20 @@ class _MyHomePageState extends State<MyHomePage> {
             //INPUT BUTTON
             ElevatedButton(
               onPressed: () {
+                if (titleController.text.isEmpty ||
+                    dateController.text.isEmpty ||
+                    startTimeController.text.isEmpty ||
+                    endTimeController.text.isEmpty ||
+                    tagsController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content:
+                          Text('Fill out every input field to submit a record'),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                  return;
+                }
                 //format tags to array
                 List<String> tags =
                     tagsController.text.replaceAll(' ', '').split(',');
@@ -117,19 +131,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         ? tag.toUpperCase()
                         : ':$tag'.toUpperCase())
                     .toList();
-                print('TAGS::$tags');
-
                 //Map data to JSON
                 Map<String, dynamic> data = {
                   'title': titleController.text,
                   'date': dateController.text,
                   'from': startTimeController.text,
                   'to': endTimeController.text,
-                  'tag': tagsController.text
+                  'tag': tags
                 };
                 //input data to db
                 _firestore.collection('records').doc().set(data).then((value) {
-                  print('Task added successfully!');
+                  const snackBar = SnackBar(
+                    content: Text('Task added successfully!'),
+                    duration: Duration(seconds: 3),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }).catchError((error) {
                   print('Error adding task $error');
                 });
