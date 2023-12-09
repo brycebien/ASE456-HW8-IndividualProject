@@ -46,12 +46,8 @@ class QueryRecord extends StatelessWidget {
                 if (queryDateController.text != '' ||
                     queryTagController.text != '' ||
                     queryTitleController.text != '') {
-                  String date;
-                  if (queryDateController.text.toLowerCase() == 'today') {
-                    date = DateTime.now().toLocal().toString().split(' ')[0];
-                  } else {
-                    date = DateValidator.ValidateDate(queryDateController.text);
-                  }
+                  String date =
+                      DateValidator.ValidateDate(queryDateController.text);
 
                   query['date'] = date;
                   query['tag'] = ':${queryTagController.text.toUpperCase()}';
@@ -67,9 +63,6 @@ class QueryRecord extends StatelessWidget {
                       ? querySearch.where('title', isEqualTo: query['task'])
                       : querySearch;
                   try {
-                    print(query['date']);
-                    print(query['task']);
-                    print(query['tag']);
                     QuerySnapshot querySnapshot = await querySearch.get();
                     querySnapshot.docs.forEach(
                       (DocumentSnapshot document) {

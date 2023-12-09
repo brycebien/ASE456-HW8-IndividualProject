@@ -2,6 +2,9 @@ import 'package:intl/intl.dart';
 
 class DateValidator {
   static String ValidateDate(String date) {
+    if (date.toLowerCase() == 'today') {
+      return DateTime.now().toLocal().toString().split(' ')[0];
+    }
     final List<String> acceptedFormats = [
       'yyyy/MM/dd',
       'yyyy/M/d',
