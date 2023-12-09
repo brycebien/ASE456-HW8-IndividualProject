@@ -41,27 +41,55 @@ class QueryRecord extends StatelessWidget {
               onPressed: () async {
                 List<Map<String, dynamic>> resultsList = [];
                 CollectionReference records = fireStore.collection('records');
+                Map<String, dynamic> query = {};
 
-                if (queryDateController.text == 'today') {
-                  String date =
-                      DateTime.now().toLocal().toString().split(' ')[0];
+                if (queryDateController.text != '' ||
+                    queryTagController.text != '' ||
+                    queryTitleController.text != '') {
+                  String date;
+                  if (queryDateController.text.toLowerCase() == 'today') {
+                    date = DateTime.now().toLocal().toString().split(' ')[0];
+                  } else {
+                    date = DateValidator.ValidateDate(queryDateController.text);
+                  }
+
+                  List<String> tags =
+                      queryTagController.text.replaceAll(' ', '').split(',');
+                  tags = tags
+                      .map((tag) => tag.startsWith(':')
+                          ? tag.toUpperCase()
+                          : ':$tag'.toUpperCase())
+                      .toList();
+
+                  query['date'] = date;
+                  query['tag'] = tags;
+                  query['task'] = queryTitleController.text;
                   try {
-                    QuerySnapshot querySnapshot =
-                        await records.where('date', isEqualTo: date).get();
-                    querySnapshot.docs.forEach(
-                      (DocumentSnapshot document) {
-                        Map<String, dynamic> results =
-                            document.data() as Map<String, dynamic>;
-                        resultsList.add(results);
-                      },
-                    );
+                    if (query['date'] != '' &&
+                        query['tag'] != '' &&
+                        query['task'] != '') {
+                      print(query['date']);
+                      print(query['task']);
+                      print(query['tag']);
+                      QuerySnapshot querySnapshot = await records
+                          .where('date', isEqualTo: query['date'])
+                          .where('title', isEqualTo: query['task'])
+                          .where('tag', isEqualTo: query['tag'])
+                          .get();
+                      querySnapshot.docs.forEach(
+                        (DocumentSnapshot document) {
+                          Map<String, dynamic> results =
+                              document.data() as Map<String, dynamic>;
+                          resultsList.add(results);
+                        },
+                      );
+                    }
                   } catch (error) {
                     print('Error querying data: $error');
                   }
                 } else {
                   String date =
                       DateValidator.ValidateDate(queryDateController.text);
-                  print('DATE:::${date}');
                   try {
                     QuerySnapshot querySnapshot =
                         await records.where('date', isEqualTo: date).get();
@@ -93,16 +121,23 @@ class QueryRecord extends StatelessWidget {
           title: const Text('Query Result'),
           content: SingleChildScrollView(
             child: Column(
-              children: resultsList.map((result) {
-                return ListTile(
-                  title: Text(
-                    result['title'] ?? '',
-                    style: const TextStyle(fontSize: 30),
-                  ),
-                  subtitle: Text(
-                      'DATE: ${result['date']}\nTAGS: ${result['tag'].toString()}\nFROM: ${result['from']}\nTO: ${result['to']}'),
-                );
-              }).toList(),
+              children: resultsList.isNotEmpty
+                  ? resultsList.map((result) {
+                      return ListTile(
+                        title: Text(
+                          result['title'],
+                          style: const TextStyle(fontSize: 30),
+                        ),
+                        subtitle: Text(
+                            'DATE: ${result['date']}\nTAGS: ${result['tag'].toString()}\nFROM: ${result['from']}\nTO: ${result['to']}'),
+                      );
+                    }).toList()
+                  : [
+                      const Text(
+                        'No Results Found',
+                        style: TextStyle(fontSize: 20),
+                      )
+                    ],
             ),
           ),
           actions: [
