@@ -1,3 +1,4 @@
+import 'package:ase456_hw8_individual_project/components/show_snackbar.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -114,13 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     startTimeController.text.isEmpty ||
                     endTimeController.text.isEmpty ||
                     tagsController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content:
-                          Text('Fill out every input field to submit a record'),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
+                  ShowSnackBar(
+                          content:
+                              'Fill out every input field to submit a record',
+                          context: context,
+                          duration: 3)
+                      .show();
                   return;
                 }
                 //format tags to array
@@ -141,11 +141,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 };
                 //input data to db
                 _firestore.collection('records').doc().set(data).then((value) {
-                  const snackBar = SnackBar(
-                    content: Text('Task added successfully!'),
-                    duration: Duration(seconds: 3),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  ShowSnackBar(
+                          content: 'Task added successfully!',
+                          context: context,
+                          duration: 3)
+                      .show();
                 }).catchError((error) {
                   print('Error adding task $error');
                 });
