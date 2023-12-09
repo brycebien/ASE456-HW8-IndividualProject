@@ -87,11 +87,10 @@ class Record extends StatelessWidget {
                       .show();
                   return;
                 }
-                //format tags to array
-                // List<String> tags =
-                //     tagsController.text.replaceAll(' ', '').split(',');
-                tagsController.text = ':${tagsController.text.toUpperCase()}';
-                //Map data to JSON
+
+                tagsController.text = tagsController.text.startsWith(':')
+                    ? '${tagsController.text.toUpperCase()}'
+                    : ':{tagsController.text.toUpperCase()}';
                 Map<String, dynamic> data = {
                   'title': titleController.text,
                   'date': dateController.text,
@@ -99,7 +98,6 @@ class Record extends StatelessWidget {
                   'to': endTimeController.text,
                   'tag': tagsController.text
                 };
-                //input data to db
                 fireStore.collection('records').doc().set(data).then((value) {
                   ShowSnackBar(
                           content: 'Task added successfully!',
