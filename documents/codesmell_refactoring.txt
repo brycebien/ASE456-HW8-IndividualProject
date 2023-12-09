@@ -25,3 +25,9 @@ Code Smell: Lack of Cohesion
     Lines: 99-104
     Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/dff56c1580716d15c44109d750f632a85cbe36b8/lib/main.dart
     Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/c63c902a4f24be932d31ff8e1c8373a2be8983ff/lib/main.dart
+
+Code Smell: Dead Code
+    Found: 12/9/2023 (lines 26-28)
+    Refactoring: Delete Code
+    Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/b12c1594fe6234c97511528a65acdf8e73e8be88/lib/utility/date_validator.dart
+    Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/16f34c7efcb29f19758c60ee543938229238b20e/lib/utility/date_validator.dart
