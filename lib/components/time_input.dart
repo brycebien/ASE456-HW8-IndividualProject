@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TimeInput extends StatefulWidget {
   final TextEditingController controller;
@@ -20,6 +21,11 @@ class _TimeInputState extends State<TimeInput> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.controller,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(
+          RegExp(r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+        ),
+      ],
       onTap: () async {
         TimeOfDay? selectedTime = await showTimePicker(
           context: context,

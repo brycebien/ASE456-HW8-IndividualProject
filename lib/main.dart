@@ -59,105 +59,120 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          //TASK
-          const Text('Input a task:'),
-          TaskInput(
-            controller: titleController,
-            hintText: 'Enter a task',
-          ),
-          const SizedBox(height: 16),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            //TASK
+            const Text('Input a task:'),
+            TaskInput(
+              controller: titleController,
+              hintText: 'Enter a task',
+            ),
+            const SizedBox(height: 16),
 
-          //DATE
-          const Text('Task Date:'),
-          DateInput(
-            controller: dateController,
-            context: context,
-            hintText: 'Enter a date',
-          ),
-          const SizedBox(height: 16),
+            //DATE
+            const Text('Task Date:'),
+            DateInput(
+              controller: dateController,
+              context: context,
+              hintText: 'Enter a date',
+            ),
+            const SizedBox(height: 16),
 
-          //START TIME
-          const Text('Start Time:'),
-          TimeInput(
-            controller: startTimeController,
-            context: context,
-            hintText: 'Select start time',
-          ),
-          const SizedBox(height: 16),
+            //START TIME
+            const Text('Start Time:'),
+            TimeInput(
+              controller: startTimeController,
+              context: context,
+              hintText: 'Select start time',
+            ),
+            const SizedBox(height: 16),
 
-          //END TIME
-          const Text('End Time:'),
-          TimeInput(
-            controller: endTimeController,
-            context: context,
-            hintText: 'Select end time',
-          ),
-          const SizedBox(height: 16),
+            //END TIME
+            const Text('End Time:'),
+            TimeInput(
+              controller: endTimeController,
+              context: context,
+              hintText: 'Select end time',
+            ),
+            const SizedBox(height: 16),
 
-          //TAG
-          const Text('Tag:'),
-          TagInput(
-            controller: tagsController,
-            hintText: 'Enter Tags (comma-seperated)',
-          ),
-          const SizedBox(height: 16),
+            //TAG
+            const Text('Tag:'),
+            TagInput(
+              controller: tagsController,
+              hintText: 'Enter Tags (comma-seperated)',
+            ),
+            const SizedBox(height: 16),
 
-          //INPUT BUTTON
-          ElevatedButton(
-            onPressed: () {
-              //Map data to JSON
-              Map<String, dynamic> data = {
-                'title': titleController.text,
-                'date': dateController.text,
-                'from': startTimeController.text,
-                'to': endTimeController.text,
-                'tag': tagsController.text
-              };
-              //input data to db
-              _firestore.collection('records').doc().set(data).then((value) {
-                print('Task added successfully!');
-              }).catchError((error) {
-                print('Error adding task $error');
-              });
-            },
-            child: const Text('Submit Record'),
-          ),
-          const SizedBox(height: 25),
+            //INPUT BUTTON
+            ElevatedButton(
+              onPressed: () {
+                //format tags to array
+                List<String> tags =
+                    tagsController.text.replaceAll(' ', '').split(',');
+                tags = tags
+                    .map((tag) => tag.startsWith(':')
+                        ? tag.toUpperCase()
+                        : ':$tag'.toUpperCase())
+                    .toList();
+                print('TAGS::$tags');
 
-          //QUERY
-          TextField(
-            controller: queryController,
-            decoration: const InputDecoration(hintText: 'input a query'),
-          ),
-          const SizedBox(height: 16),
-          //QUERY INPUT BUTTON
-          ElevatedButton(
-            onPressed: () async {
-              //query events from current day if query == 'today'
-              if (queryController.text == 'today') {
-                String date = DateTime.now().toLocal().toString().split(' ')[0];
+                //Map data to JSON
+                Map<String, dynamic> data = {
+                  'title': titleController.text,
+                  'date': dateController.text,
+                  'from': startTimeController.text,
+                  'to': endTimeController.text,
+                  'tag': tagsController.text
+                };
+                //input data to db
+                _firestore.collection('records').doc().set(data).then((value) {
+                  print('Task added successfully!');
+                }).catchError((error) {
+                  print('Error adding task $error');
+                });
+              },
+              child: const Text('Submit Record'),
+            ),
+            const SizedBox(height: 25),
 
-                CollectionReference records = _firestore.collection('records');
+            //QUERY
+            TextField(
+              controller: queryController,
+              decoration: const InputDecoration(hintText: 'input a query'),
+            ),
+            const SizedBox(height: 16),
+            //QUERY INPUT BUTTON
+            ElevatedButton(
+              onPressed: () async {
+                //query events from current day if query == 'today'
+                if (queryController.text == 'today') {
+                  String date =
+                      DateTime.now().toLocal().toString().split(' ')[0];
 
-                try {
-                  //query db
-                  QuerySnapshot querySnapshot =
-                      await records.where('date', isEqualTo: date).get();
+                  CollectionReference records =
+                      _firestore.collection('records');
 
-                  //iterating through query results
-                  querySnapshot.docs.forEach((DocumentSnapshot document) {
-                    print(document.data());
-                  });
-                } catch (error) {
-                  print('Error querying data: $error');
+                  try {
+                    //query db
+                    QuerySnapshot querySnapshot =
+                        await records.where('date', isEqualTo: date).get();
+
+                    //iterating through query results
+                    querySnapshot.docs.forEach((DocumentSnapshot document) {
+                      print(document.data());
+                    });
+                  } catch (error) {
+                    print('Error querying data: $error');
+                  }
                 }
-              }
-            },
-            child: const Text('Submit Query'),
-          )
-        ],
+              },
+              child: const Text('Submit Query'),
+            )
+          ],
+        ),
       ),
     );
   }
