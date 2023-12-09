@@ -147,6 +147,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           duration: 3)
                       .show();
                 }).catchError((error) {
+                  ShowSnackBar(
+                          content: 'error adding task: $error',
+                          context: context,
+                          duration: 3)
+                      .show();
                   print('Error adding task $error');
                 });
               },
