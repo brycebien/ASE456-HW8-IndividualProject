@@ -1,4 +1,5 @@
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
+import 'package:ase456_hw8_individual_project/pages/priority.dart';
 import 'package:ase456_hw8_individual_project/pages/report.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -155,7 +156,12 @@ class _MyHomePageState extends State<MyHomePage> {
               constraints: const BoxConstraints(minWidth: 300),
               child: IconButton(
                 onPressed: () {
-                  print('something');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Priority(fireStore: _firestore),
+                    ),
+                  );
                 },
                 icon: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
