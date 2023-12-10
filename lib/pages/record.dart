@@ -93,7 +93,7 @@ class Record extends StatelessWidget {
 
                 tagsController.text = tagsController.text.startsWith(':')
                     ? tagsController.text.toUpperCase()
-                    : ':{tagsController.text.toUpperCase()}';
+                    : ':${tagsController.text.toUpperCase()}';
                 Map<String, dynamic> data = {
                   'title': titleController.text,
                   'date': dateController.text,

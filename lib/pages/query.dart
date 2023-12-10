@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:ase456_hw8_individual_project/components/date_input.dart';
 import 'package:ase456_hw8_individual_project/components/tag_input.dart';
 import 'package:ase456_hw8_individual_project/components/task_input.dart';
 import 'package:ase456_hw8_individual_project/utility/date_validator.dart';
@@ -28,10 +29,10 @@ class QueryRecord extends StatelessWidget {
             TaskInput(
                 controller: queryTitleController, hintText: 'Enter a Task'),
             const SizedBox(height: 16),
-            TextField(
-              controller: queryDateController,
-              decoration: const InputDecoration(hintText: 'Enter a Date'),
-            ),
+            DateInput(
+                controller: queryDateController,
+                context: context,
+                hintText: 'Enter a Date'),
             const SizedBox(height: 16),
             TagInput(controller: queryTagController, hintText: 'Enter a Tag'),
             const SizedBox(height: 16),
