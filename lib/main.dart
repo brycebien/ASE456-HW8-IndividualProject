@@ -110,6 +110,33 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Record(fireStore: _firestore),
+                    ),
+                  );
+                },
+                icon: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.record_voice_over_outlined,
+                      size: 300,
+                    ),
+                    Text(
+                      'Record Date Range',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
               )
             ],
           ),
