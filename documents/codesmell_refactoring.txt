@@ -31,9 +31,3 @@ Code Smell: Dead Code
     Refactoring: Delete Code
     Link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/b12c1594fe6234c97511528a65acdf8e73e8be88/lib/utility/date_validator.dart
     Link to github w/ refactoring: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/16f34c7efcb29f19758c60ee543938229238b20e/lib/utility/date_validator.dart
-
-Code Smell: Long Method
-    Found: 12/10/2023 (lines 39-91)
-    Refactoring: Extract Class
-    link to github w/ code smell: https://github.com/brycebien/ASE456-HW8-IndividualProject/blob/21bbdb1d5ffb05c5257f49a54b11593d4e91dac9/lib/pages/query.dart#L39
-    link to github w/ refactoring:
