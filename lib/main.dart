@@ -1,4 +1,5 @@
 import 'package:ase456_hw8_individual_project/firebase_options.dart';
+import 'package:ase456_hw8_individual_project/pages/report.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Record(fireStore: _firestore),
+                      builder: (context) => Report(fireStore: _firestore),
                     ),
                   );
                 },
@@ -139,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       size: 300,
                     ),
                     Text(
-                      'Record Date Range',
+                      'Report Date Range',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
