@@ -52,15 +52,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Center(child: Text(widget.title)),
-        ),
-        body: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Center(child: Text(widget.title)),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 300),
+              child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -84,10 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              IconButton(
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 300),
+              child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -111,10 +116,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              IconButton(
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 300),
+              child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -134,12 +142,39 @@ class _MyHomePageState extends State<MyHomePage> {
                       'Record Date Range',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ),
-              )
-            ],
-          ),
-        ));
+              ),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 300),
+              child: IconButton(
+                onPressed: () {
+                  print('something');
+                },
+                icon: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.priority_high_outlined,
+                      size: 300,
+                    ),
+                    Text(
+                      'Priority',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
