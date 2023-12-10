@@ -38,6 +38,8 @@ class QueryRecord extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
+                queryDateController.text =
+                    DateValidator.ValidateDate(queryDateController.text);
                 List<Map<String, dynamic>> resultsList = [];
                 CollectionReference records = fireStore.collection('records');
                 Map<String, dynamic> query = {};
