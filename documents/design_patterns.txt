@@ -1,0 +1,5 @@
+Strategy
+Command
+Iterator
+Dependency Injection
+Singleton
