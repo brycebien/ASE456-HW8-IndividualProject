@@ -30,7 +30,6 @@ class QueryReport {
       ).toList();
 
       for (DateTime date in dateList) {
-        print('DATE BEING QUER:::${DateFormat('yyyy-MM-dd').format(date)}');
         Query querySearch = records.where('date',
             isEqualTo: DateFormat('yyyy-MM-dd').format(date));
         querySnapshot = await querySearch.get();
